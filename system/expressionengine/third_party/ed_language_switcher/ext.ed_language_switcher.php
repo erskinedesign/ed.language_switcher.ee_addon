@@ -73,19 +73,17 @@ class Ed_language_switcher_ext
 	
 	public function sessions_end()
 	{
-	    // We set {default_language} in index.php so that frieze international and 
-	    // frieze d/e can have different default languages
-	    $default_language = ( $this->EE->config->_global_vars['default_language'] != "" ) ? $this->EE->config->_global_vars['default_language'] : "en";
-	    
+        // We set {default_language} in index.php so that subdomains of folders can have different defaults
+        $default_language = ( $this->EE->config->_global_vars['default_language'] != "" ) ? $this->EE->config->_global_vars['default_language'] : "en";
+
         $user_language = $default_language;
         
         // Do we have a language set as a cookie?
         // If so, use it's value to set the current language    
         if ( $this->EE->input->cookie('user_language') AND $this->is_allowed_language($this->EE->input->cookie('user_language')) ) {
-			
-			$user_language = $this->EE->input->cookie('user_language');
-			
-		}
+
+            $user_language = $this->EE->input->cookie('user_language');
+        }
         
         // Do we have a language requested in a get variable i.e. lang=de ?
         // If so, use it's value to set the current language
